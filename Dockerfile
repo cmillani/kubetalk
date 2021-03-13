@@ -4,8 +4,13 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install --only=production
+RUN npm install
 
 COPY . .
 
-CMD [ "node", "server.js" ]
+RUN npm run build
+RUN npm prune --production
+
+EXPOSE 8081
+
+CMD [ "npm", "start"]

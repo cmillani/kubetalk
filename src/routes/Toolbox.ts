@@ -1,14 +1,10 @@
 import StatusCodes from 'http-status-codes';
 import { Request, Response, Router } from 'express';
 
-import UserDao from '@daos/User/UserDao.mock';
-import { paramMissingError, IRequest } from '@shared/constants';
-import Info, { IInfo } from '@entities/Info';
-import InfoService from 'src/services/InfoService';
+import InfoService from '@services/InfoService';
 
 const router = Router();
-const userDao = new UserDao();
-const { BAD_REQUEST, CREATED, OK } = StatusCodes;
+const { OK } = StatusCodes;
 const infoService = new InfoService();
 
 

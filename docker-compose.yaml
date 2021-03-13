@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  nodejs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cmillani/node-sample
+    container_name: node-sample
+    ports:
+      - "8080:8081"
