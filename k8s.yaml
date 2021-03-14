@@ -18,10 +18,6 @@ spec:
       port: 80
       targetPort: 8081
   type: LoadBalancer
-  sessionAffinity: ClientIP
-  sessionAffinityConfig:
-      clientIP:
-        timeoutSeconds: 1
 ---
 apiVersion: apps/v1
 kind: Deployment

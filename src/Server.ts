@@ -30,7 +30,10 @@ if (process.env.NODE_ENV === 'development') {
 
 // Security
 if (process.env.NODE_ENV === 'production') {
-    app.use(helmet());
+    // Helmet causes scripts to be requested as https
+    // This demo app is not intended to be exposed and should be used for short periods only
+    // Because of this, helmet is not enabled
+    //app.use(helmet());
 }
 
 // Add APIs
