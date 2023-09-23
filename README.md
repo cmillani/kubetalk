@@ -10,4 +10,6 @@ This project is a little toolbox to demonstrate kubernete's orchestration capabi
 
 # Load Balancer
 
-To demonstrate the load being balanced by the pods use `curl -H "Connection: close" <Service-IP>/api/toolbox/info`. Connection close is needed since balancing is done at TCP level, and with HTTP Keep-Alive the same pod would be used.
+To demonstrate the load being balanced by the pods use `curl -H "Connection: close" http://kubetalk.example.com/api/toolbox/info --resolve kubetalk.example.com:80:<ingress-ip>`. Connection close is needed since balancing is done at TCP level, and with HTTP Keep-Alive the same pod would be used.
+
+The value `<ingress-ip>` needs to be replaced by the "Address" field available displayed on `kubectl get ingress`.

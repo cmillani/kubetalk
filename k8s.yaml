@@ -3,6 +3,26 @@ kind: Namespace
 metadata:
   name: techtalk
 ---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: techtalk
+  name: kubetalk
+  labels:
+    app: kubetalk
+spec:
+  rules:
+  - host: kubetalk.example.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: kubetalk
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -17,7 +37,7 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 8081
-  type: LoadBalancer
+  type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -52,10 +72,13 @@ spec:
         - containerPort: 8081
           name: kubetalk
 ---
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
+  namespace: techtalk
   name: kubetalk
+  labels:
+    app: kubetalk
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
